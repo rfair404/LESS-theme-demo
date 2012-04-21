@@ -1,0 +1,106 @@
+/*
+* Start my LESS file for demonstration purposes only. 
+*/
+/*
+* An example of what LESS can do...
+*/
+/*
+* Example one... Variables...
+*/
+body {
+  background: #e4e9c2;
+}
+.hfeed {
+  background: #ccc990;
+  border-radius: 25px;
+  padding: 1%;
+}
+/*
+* Example two... Nested rules...
+*/
+body.blog .hfeed {
+  background: #333dde;
+}
+body.archive .hfeed {
+  background: #ccc990;
+  padding: 1%;
+}
+/*
+* Example three... Mixins...
+*/
+.minimal-padding {
+  padding: 1%;
+}
+.extreme-padding {
+  padding: 10%;
+}
+.rounded-corners {
+  border-radius: 25px;
+}
+body.blog {
+  padding: 1%;
+}
+.hfeed {
+  border-radius: 25px;
+  padding: 10%;
+}
+/*
+* Example 4... Fancy (Parametric) Mixins... e.g. with args 
+*/
+body.blog .hfeed {
+  box-shadow: #ffc0cb -5px -5px 30px;
+  -webkit-transform: scale(0.9);
+}
+/*
+* Example 5... Functions...
+* define our own function recolor...
+*/
+body.blog .hfeed {
+  background: #800080;
+}
+/*
+* Example 6... built in LESS color functions saturate, spin, lighten, darken, mix * and friends...
+*/
+body.blog p {
+  background: #fff75d;
+}
+.hfeed a {
+  color: #bbcc90;
+}
+.hentry:first-child {
+  background: #ffffff;
+}
+.hentry:nth-child(2n+2) {
+  background: #ecebd6;
+}
+.hentry:nth-child(2n+1) {
+  background: #c4c17f;
+}
+body.blog {
+  background: #7f33de;
+}
+/* Example 7b... nested color functions
+*/
+.hentry:nth-child(2n+2) p:first-child {
+  background: #12e5ff;
+}
+/*
+* Example 7... built in LESS math functions *, /, +, -, floor, ceil, round, etc
+*/
+.multiplication {
+  margin: 2%;
+}
+.division {
+  margin: 5%;
+}
+.hentry:first-child {
+  margin: 2%;
+  width: 450px;
+}
+.hentry:nth-child(2n+2) {
+  width: 400px;
+  height: 400px;
+  margin: 5%;
+  width: 250px;
+  border-radius: 628.3077999999999px;
+}

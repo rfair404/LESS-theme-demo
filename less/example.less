@@ -1,0 +1,191 @@
+/*
+* Start my LESS file for demonstration purposes only. 
+*/
+
+
+/*
+* An example of what LESS can do...
+*/
+
+/*
+* Example one... Variables...
+*/
+
+
+@color1: #e4e9c2;
+@color2: #ccc990;
+@color3: #333dde;
+@radius1: 25px;
+@padding1: 1%;
+@padding2: 10%;
+
+body {
+	background: @color1;
+}
+
+.hfeed {
+	background:@color2;
+	border-radius:@radius1;
+	padding:@padding1;
+}
+
+/*
+* Example two... Nested rules...
+*/
+
+body.blog {
+	.hfeed {
+		background: @color3;
+	}
+}
+
+body.archive {
+	.hfeed {
+		background: @color2;
+		.minimal-padding;
+	}
+}
+
+/*
+* Example three... Mixins...
+*/
+
+.minimal-padding {
+	padding:@padding1;
+}
+
+.extreme-padding {
+	padding:@padding2;
+}
+
+.rounded-corners {
+	border-radius: @radius1;
+}
+
+body.blog {
+	.minimal-padding;
+}
+
+.hfeed {
+	.rounded-corners;
+	.extreme-padding;
+}
+
+/*
+* Example 4... Fancy (Parametric) Mixins... e.g. with args 
+*/
+
+.box-shadow(@bscolor, @bsoffsety, @bsoffsetx, @bsblur) {
+	box-shadow: @bscolor @bsoffsety @bsoffsetx @bsblur;
+}
+
+.resize(@rotate: 1.1) {
+	-webkit-transform: scale(@rotate);
+}
+
+body.blog .hfeed {
+	.box-shadow(pink, -5px, -5px, 30px);
+	.resize(.9);
+}
+
+
+/*
+* Example 5... Functions...
+* define our own function recolor...
+*/
+
+
+.recolor( @color4:purple ) {
+	body.blog {
+		.hfeed {
+			background:@color4;
+		}
+	}
+}
+
+.recolor();
+
+/*
+* Example 6... built in LESS color functions saturate, spin, lighten, darken, mix * and friends...
+*/
+
+
+body.blog {
+	p {
+		background: saturate(@color2, 90%);
+	}
+}
+
+.hfeed a {
+	color: spin(@color2, 20);
+}
+
+.hentry:first-child {
+	background: lighten( @color1 , 20% );
+}
+
+.hentry:nth-child(2n+2) {
+	background: lighten( @color2 , 20% );
+}
+
+.hentry:nth-child(2n+1) {
+	background: darken( @color2 , 5% );
+}
+
+.background-crazy( @color ){
+	background: spin( @color, 30 );
+}
+
+body.blog {
+		.background-crazy( @color3 );
+}
+
+/* Example 7b... nested color functions
+*/
+
+.hentry:nth-child(2n+2) p:first-child {
+	background: saturate( spin( @color3, -50 ), 30% );
+}
+
+/*
+* Example 7... built in LESS math functions *, /, +, -, floor, ceil, round, etc
+*/
+
+.multiplication {
+	margin: @padding1 * 2;
+}
+.division {
+	margin: @padding2 / 2;
+}
+
+.addition(@width1, @width2) {
+	width: @width1 + @width2;
+}
+
+.subtraction(@width1, @width2) {
+	width: @width1 - @width2;
+}
+
+.circle(@width) {
+	border-radius: @width * 3.141539 / 2;
+}
+
+
+.hentry:first-child {
+	.multiplication;
+	.addition(300px, 150px);
+}
+
+.hentry:nth-child(2n+2){
+	@width:400px;
+	width: @width;
+	height:@width;
+	.division;
+	.subtraction(400px, 150px);
+	.circle(@width);
+}
+
+
+
+
+

@@ -2,73 +2,225 @@
 * Start my LESS file for demonstration purposes only. 
 */
 /* DEFINE AND USE MIXINS */
+/***************************/
 h1#site-title a {
   color: #db5fa5;
 }
 h2#site-description {
   color: #ff9400;
 }
+/***************************/
 /* NESTED RULES */
-body.blog .hfeed {
-  background: #dda67c;
-  padding: 1%;
-}
-body.archive .hfeed {
-  background: #ff9400;
-  padding: 10%;
-}
-/* USE MIXINS */
-.minimal-padding {
-  padding: 1%;
-}
-.extreme-padding {
-  padding: 10%;
-}
-.rounded-corners {
-  border-radius: 3%;
-}
-body.blog .hfeed {
-  padding: 1%;
-}
-body.archive .hfeed {
-  border-radius: 3%;
-  padding: 10%;
-}
-/* FANCY MIXINS (parametric) */
-body.blog .hfeed {
-  box-shadow: #db5fa5 -5px -5px 30px;
-  -webkit-transform: scale(0.9);
-}
-/* CUSTOM FUNCTIONS */
+/***************************
+
 body.blog {
-  background: #db5fa5;
+	.hfeed {
+		background: @color3;
+		padding: @padding1;
+	}
 }
+
+body.archive {
+	.hfeed {
+		background: @color2;
+		padding: @padding2;
+	}
+}
+
+***************************/
+/* USE MIXINS */
+/***************************
+
+.minimal-padding {
+	padding:@padding1;
+}
+
+.extreme-padding {
+	padding:@padding2;
+}
+
+.rounded-corners {
+	border-radius: @radius1;
+}
+
+body.blog .hfeed { 
+	.minimal-padding;
+}
+
+body.archive .hfeed {
+	.rounded-corners;
+	.extreme-padding;
+}
+
+***************************/
+/* FANCY MIXINS (parametric) */
+/***************************
+
+.box-shadow(@bscolor, @bsoffsety, @bsoffsetx, @bsblur) {
+	box-shadow: @bscolor @bsoffsety @bsoffsetx @bsblur;
+}
+
+.resize(@scale: 1.1) {
+	-webkit-transform: scale(@scale);
+}
+
+body.blog .hfeed {
+	.box-shadow(@color1, -5px, -5px, 30px);
+	.resize(.9);
+}
+
+***************************/
+/* CUSTOM FUNCTIONS */
+/***************************
+
+.recolor( @color:@color1 ) {
+	body.blog {
+			background:@color;
+	}
+}
+
+.recolor();
+
+***************************/
 /* BUILT IN FUNCTIONS */
+/***************************
+
 .hentry:nth-child(2n+1) {
-  background: #ff9f1a;
+	background: lighten( @color1 , 5% );
 }
+
 .hentry:nth-child(2n+2) {
-  background: #e68500;
+	background: darken( @color2 , 5% );
 }
+
 .hentry a {
-  color: #ffe900;
+	color: spin(@color2, 20);
 }
+
+***************************/
 /* NESTED FUNCTIONS */
+/***************************
+
 .hentry P {
-  background: #f6639e;
+	background: saturate( spin( @color3, -50 ), 30% );
 }
+
+***************************/
 /* READING, WRITING AND ARITHMATIC */
+/***************************
+
 .multiplication {
-  padding: 2%;
+	padding: @padding1 * 2;
 }
 .division {
-  padding: 5%;
+	padding: @padding2 / 2;
 }
+
+.addition(@width1, @width2) {
+	width: @width1 + @width2;
+}
+
+.subtraction(@width1, @width2) {
+	width: @width1 - @width2;
+}
+
 .hentry:nth-child(2n+1) {
-  width: 500px;
-  padding: 2%;
+	.addition(400px, 100px);
+	.multiplication;
 }
+
 .hentry:nth-child(2n+2) {
-  width: 300px;
-  padding: 5%;
+	.subtraction(400px, 100px);
+	.division;
 }
+
+***************************/
+/* LETTERING EXAMPLE */
+/***************************
+
+
+
+#site-title {
+
+	font-family: 'Press Start 2P', cursive;
+
+	@letter-color:#ff4400;
+	@letter-step: 10;
+	@line-color: #888777;
+
+	span {
+		color: @letter-color;
+	}
+	span.char1 {
+		color: spin(@letter-color,1*@letter-step);
+	}
+	span:nth-child(4n+1) {
+		color: spin(@letter-color,2*@letter-step);
+	}
+	span:nth-child(4n+2) {
+		color: spin(@letter-color,3*@letter-step);
+	}
+	span:nth-child(4n+3) {
+		color: spin(@letter-color,4*@letter-step);
+	}
+	span:nth-child(4n+4) {
+		color: spin(@letter-color,5*@letter-step);
+	}
+}
+
+#site-description {
+
+	@word-color: #445599;
+	@word-step: 10;
+
+	span {
+		color: @word-color;
+	}
+	span.word1 {
+		color: spin(@word-color, @word-step*9);
+	}
+	span:nth-child(2n+1) {
+		color: spin(@word-color, @word-step*18);
+	}
+	span:nth-child(2n+2) {
+		color: spin(@word-color, @word-step*9*-1)
+	}
+}
+
+.entry-title {
+
+	@letter-color: #990077;
+
+	span {
+		color: @letter-color;
+	}
+	
+	span:nth-child(2n+2) {
+		color: desaturate(@letter-color, 40);
+	}
+}
+
+.entry-content {
+	
+	@color:#999;
+
+	p {
+		color: @color;
+	}
+
+	span.word1 span.char1 {
+		color: spin(@color, -10);
+		font-size: 2em;
+		font-weight: bold;
+		top: 10px;
+		position: relative;
+		font-family: 'Press Start 2P', cursive;
+	
+	}
+	span:nth-child(10n+1) {
+		color: spin(@color, 10);
+	}
+
+}
+
+***************************/

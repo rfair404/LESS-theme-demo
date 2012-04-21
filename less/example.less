@@ -5,6 +5,8 @@
 
 /* DEFINE AND USE MIXINS */
 
+/***************************/
+
 @color1: #db5fa5;
 @color2: #ff9400;
 @color3: #DDA67C;
@@ -20,7 +22,11 @@ h2#site-description {
 	color: @color2;
 }
 
+/***************************/
+
 /* NESTED RULES */
+
+/***************************
 
 body.blog {
 	.hfeed {
@@ -36,7 +42,11 @@ body.archive {
 	}
 }
 
+***************************/
+
 /* USE MIXINS */
+
+/***************************
 
 .minimal-padding {
 	padding:@padding1;
@@ -59,7 +69,11 @@ body.archive .hfeed {
 	.extreme-padding;
 }
 
+***************************/
+
 /* FANCY MIXINS (parametric) */
+
+/***************************
 
 .box-shadow(@bscolor, @bsoffsety, @bsoffsetx, @bsblur) {
 	box-shadow: @bscolor @bsoffsety @bsoffsetx @bsblur;
@@ -74,7 +88,11 @@ body.blog .hfeed {
 	.resize(.9);
 }
 
+***************************/
+
 /* CUSTOM FUNCTIONS */
+
+/***************************
 
 .recolor( @color:@color1 ) {
 	body.blog {
@@ -84,10 +102,14 @@ body.blog .hfeed {
 
 .recolor();
 
+***************************/
+
 /* BUILT IN FUNCTIONS */
 
+/***************************
+
 .hentry:nth-child(2n+1) {
-	background: lighten( @color2 , 5% );
+	background: lighten( @color1 , 5% );
 }
 
 .hentry:nth-child(2n+2) {
@@ -98,13 +120,21 @@ body.blog .hfeed {
 	color: spin(@color2, 20);
 }
 
+***************************/
+
 /* NESTED FUNCTIONS */
+
+/***************************
 
 .hentry P {
 	background: saturate( spin( @color3, -50 ), 30% );
 }
 
+***************************/
+
 /* READING, WRITING AND ARITHMATIC */
+
+/***************************
 
 .multiplication {
 	padding: @padding1 * 2;
@@ -130,3 +160,96 @@ body.blog .hfeed {
 	.subtraction(400px, 100px);
 	.division;
 }
+
+***************************/
+
+/* LETTERING EXAMPLE */
+
+/***************************
+
+
+
+#site-title {
+
+	font-family: 'Press Start 2P', cursive;
+
+	@letter-color:#ff4400;
+	@letter-step: 10;
+	@line-color: #888777;
+
+	span {
+		color: @letter-color;
+	}
+	span.char1 {
+		color: spin(@letter-color,1*@letter-step);
+	}
+	span:nth-child(4n+1) {
+		color: spin(@letter-color,2*@letter-step);
+	}
+	span:nth-child(4n+2) {
+		color: spin(@letter-color,3*@letter-step);
+	}
+	span:nth-child(4n+3) {
+		color: spin(@letter-color,4*@letter-step);
+	}
+	span:nth-child(4n+4) {
+		color: spin(@letter-color,5*@letter-step);
+	}
+}
+
+#site-description {
+
+	@word-color: #445599;
+	@word-step: 10;
+
+	span {
+		color: @word-color;
+	}
+	span.word1 {
+		color: spin(@word-color, @word-step*9);
+	}
+	span:nth-child(2n+1) {
+		color: spin(@word-color, @word-step*18);
+	}
+	span:nth-child(2n+2) {
+		color: spin(@word-color, @word-step*9*-1)
+	}
+}
+
+.entry-title {
+
+	@letter-color: #990077;
+
+	span {
+		color: @letter-color;
+	}
+	
+	span:nth-child(2n+2) {
+		color: desaturate(@letter-color, 40);
+	}
+}
+
+.entry-content {
+	
+	@color:#999;
+
+	p {
+		color: @color;
+	}
+
+	span.word1 span.char1 {
+		color: spin(@color, -10);
+		font-size: 2em;
+		font-weight: bold;
+		top: 10px;
+		position: relative;
+		font-family: 'Press Start 2P', cursive;
+	
+	}
+	span:nth-child(10n+1) {
+		color: spin(@color, 10);
+	}
+
+}
+
+***************************/

@@ -2,17 +2,9 @@
 
 define ('THEME_URL', get_stylesheet_directory_uri() );
 
-//add_action('wp_head', 'ltd_janky_way_less');
-
-/* 
-function ltd_janky_way_less() { ?>
-	<link rel="stylesheet/less" type="text/css" href="<?php echo THEME_URL; ?>/less/example.less">
-	<script src="<?php echo THEME_URL; ?>/js/less-1.2.0.min.js" type="text/javascript"></script>
-<?php } 
-*/
-
 add_action('init', 'ltd_register_less');
 
+//register the less js file and example less stylesheet
 function ltd_register_less() {
 	wp_register_script('less', THEME_URL . '/js/less-1.2.0.min.js', array('jquery'), '007', true);
 	wp_register_style('lesscss', THEME_URL . '/less/example.less', array(), '007', 'screen');
@@ -20,6 +12,7 @@ function ltd_register_less() {
 
 add_action ('wp_print_scripts', 'ltd_less_js');
 
+//enqueue less js
 function ltd_less_js() {
 	if ( ! is_admin() )  
 		wp_enqueue_script('less');
@@ -27,19 +20,23 @@ function ltd_less_js() {
 
 add_action('wp_print_styles', 'ltd_less_css');
 
+//enqueue less css
 function ltd_less_css() {
 	if ( ! is_admin() ) 
 		wp_enqueue_style('lesscss');
 }
 
-add_action('wp_print_styles', 'ltd_okay_way_2011css');
+add_action('wp_print_styles', 'ltd_add_twentyeleven_css');
 
-function ltd_okay_way_2011css() {
+//enqueue twentyeleven css
+function ltd_add_twentyeleven_css() {
 	if ( ! is_admin() )
 		wp_enqueue_style('twentyeleven-css', get_bloginfo( 'template_url' ) . '/style.css' , array(), '007');
 } 
 
-function enqueue_less_styles($tag, $handle) {
+add_filter( 'style_loader_tag', 'ltd_enqueue_less_styles', 5, 2);
+
+function ltd_enqueue_less_styles($tag, $handle) {
     global $wp_styles;
     $match_pattern = '/\.less$/U';
     if ( preg_match( $match_pattern, $wp_styles->registered[$handle]->src ) ) {
@@ -53,4 +50,6 @@ function enqueue_less_styles($tag, $handle) {
     }
     return $tag;
 }
-add_filter( 'style_loader_tag', 'enqueue_less_styles', 5, 2);
+
+
+

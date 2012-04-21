@@ -2,14 +2,24 @@
 * Start my LESS file for demonstration purposes only. 
 */
 /* DEFINE AND USE MIXINS */
-/***************************/
+/***************************
+
+@color1: #db5fa5;
+@color2: #ff9400;
+@color3: #DDA67C;
+@radius1: 3%;
+@padding1: 1%;
+@padding2: 10%;
+
 h1#site-title a {
-  color: #db5fa5;
+	color: @color1;
 }
+
 h2#site-description {
-  color: #ff9400;
+	color: @color2;
 }
-/***************************/
+
+***************************/
 /* NESTED RULES */
 /***************************
 
@@ -223,4 +233,4 @@ body.blog .hfeed {
 
 }
 
-***************************/
+/***************************/

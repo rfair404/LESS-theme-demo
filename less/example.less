@@ -3,52 +3,40 @@
 */
 
 
-/*
-* An example of what LESS can do...
-*/
+/* DEFINE AND USE MIXINS */
 
-/*
-* Example one... Variables...
-*/
-
-
-@color1: #e4e9c2;
-@color2: #ccc990;
-@color3: #333dde;
-@radius1: 25px;
+@color1: #db5fa5;
+@color2: #ff9400;
+@color3: #DDA67C;
+@radius1: 3%;
 @padding1: 1%;
 @padding2: 10%;
 
-body {
-	background: @color1;
+h1#site-title a {
+	color: @color1;
 }
 
-.hfeed {
-	background:@color2;
-	border-radius:@radius1;
-	padding:@padding1;
+h2#site-description {
+	color: @color2;
 }
 
-/*
-* Example two... Nested rules...
-*/
+/* NESTED RULES */
 
 body.blog {
 	.hfeed {
 		background: @color3;
+		padding: @padding1;
 	}
 }
 
 body.archive {
 	.hfeed {
 		background: @color2;
-		.minimal-padding;
+		padding: @padding2;
 	}
 }
 
-/*
-* Example three... Mixins...
-*/
+/* USE MIXINS */
 
 .minimal-padding {
 	padding:@padding1;
@@ -62,100 +50,67 @@ body.archive {
 	border-radius: @radius1;
 }
 
-body.blog {
+body.blog .hfeed { 
 	.minimal-padding;
 }
 
-.hfeed {
+body.archive .hfeed {
 	.rounded-corners;
 	.extreme-padding;
 }
 
-/*
-* Example 4... Fancy (Parametric) Mixins... e.g. with args 
-*/
+/* FANCY MIXINS (parametric) */
 
 .box-shadow(@bscolor, @bsoffsety, @bsoffsetx, @bsblur) {
 	box-shadow: @bscolor @bsoffsety @bsoffsetx @bsblur;
 }
 
-.resize(@rotate: 1.1) {
-	-webkit-transform: scale(@rotate);
+.resize(@scale: 1.1) {
+	-webkit-transform: scale(@scale);
 }
 
 body.blog .hfeed {
-	.box-shadow(pink, -5px, -5px, 30px);
+	.box-shadow(@color1, -5px, -5px, 30px);
 	.resize(.9);
 }
 
+/* CUSTOM FUNCTIONS */
 
-/*
-* Example 5... Functions...
-* define our own function recolor...
-*/
-
-
-.recolor( @color4:purple ) {
+.recolor( @color:@color1 ) {
 	body.blog {
-		.hfeed {
-			background:@color4;
-		}
+			background:@color;
 	}
 }
 
 .recolor();
 
-/*
-* Example 6... built in LESS color functions saturate, spin, lighten, darken, mix * and friends...
-*/
+/* BUILT IN FUNCTIONS */
 
-
-body.blog {
-	p {
-		background: saturate(@color2, 90%);
-	}
-}
-
-.hfeed a {
-	color: spin(@color2, 20);
-}
-
-.hentry:first-child {
-	background: lighten( @color1 , 20% );
+.hentry:nth-child(2n+1) {
+	background: lighten( @color2 , 5% );
 }
 
 .hentry:nth-child(2n+2) {
-	background: lighten( @color2 , 20% );
-}
-
-.hentry:nth-child(2n+1) {
 	background: darken( @color2 , 5% );
 }
 
-.background-crazy( @color ){
-	background: spin( @color, 30 );
+.hentry a {
+	color: spin(@color2, 20);
 }
 
-body.blog {
-		.background-crazy( @color3 );
-}
+/* NESTED FUNCTIONS */
 
-/* Example 7b... nested color functions
-*/
-
-.hentry:nth-child(2n+2) p:first-child {
+.hentry P {
 	background: saturate( spin( @color3, -50 ), 30% );
 }
 
-/*
-* Example 7... built in LESS math functions *, /, +, -, floor, ceil, round, etc
-*/
+/* READING, WRITING AND ARITHMATIC */
 
 .multiplication {
-	margin: @padding1 * 2;
+	padding: @padding1 * 2;
 }
 .division {
-	margin: @padding2 / 2;
+	padding: @padding2 / 2;
 }
 
 .addition(@width1, @width2) {
@@ -166,26 +121,12 @@ body.blog {
 	width: @width1 - @width2;
 }
 
-.circle(@width) {
-	border-radius: @width * 3.141539 / 2;
-}
-
-
-.hentry:first-child {
+.hentry:nth-child(2n+1) {
+	.addition(400px, 100px);
 	.multiplication;
-	.addition(300px, 150px);
 }
 
-.hentry:nth-child(2n+2){
-	@width:400px;
-	width: @width;
-	height:@width;
+.hentry:nth-child(2n+2) {
+	.subtraction(400px, 100px);
 	.division;
-	.subtraction(400px, 150px);
-	.circle(@width);
 }
-
-
-
-
-

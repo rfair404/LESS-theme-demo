@@ -1,33 +1,23 @@
 /*
 * Start my LESS file for demonstration purposes only. 
 */
-/*
-* An example of what LESS can do...
-*/
-/*
-* Example one... Variables...
-*/
-body {
-  background: #e4e9c2;
+/* DEFINE AND USE MIXINS */
+h1#site-title a {
+  color: #db5fa5;
 }
-.hfeed {
-  background: #ccc990;
-  border-radius: 25px;
-  padding: 1%;
+h2#site-description {
+  color: #ff9400;
 }
-/*
-* Example two... Nested rules...
-*/
+/* NESTED RULES */
 body.blog .hfeed {
-  background: #333dde;
+  background: #dda67c;
+  padding: 1%;
 }
 body.archive .hfeed {
-  background: #ccc990;
-  padding: 1%;
+  background: #ff9400;
+  padding: 10%;
 }
-/*
-* Example three... Mixins...
-*/
+/* USE MIXINS */
 .minimal-padding {
   padding: 1%;
 }
@@ -35,72 +25,50 @@ body.archive .hfeed {
   padding: 10%;
 }
 .rounded-corners {
-  border-radius: 25px;
+  border-radius: 3%;
 }
-body.blog {
+body.blog .hfeed {
   padding: 1%;
 }
-.hfeed {
-  border-radius: 25px;
+body.archive .hfeed {
+  border-radius: 3%;
   padding: 10%;
 }
-/*
-* Example 4... Fancy (Parametric) Mixins... e.g. with args 
-*/
+/* FANCY MIXINS (parametric) */
 body.blog .hfeed {
-  box-shadow: #ffc0cb -5px -5px 30px;
+  box-shadow: #db5fa5 -5px -5px 30px;
   -webkit-transform: scale(0.9);
 }
-/*
-* Example 5... Functions...
-* define our own function recolor...
-*/
-body.blog .hfeed {
-  background: #800080;
+/* CUSTOM FUNCTIONS */
+body.blog {
+  background: #db5fa5;
 }
-/*
-* Example 6... built in LESS color functions saturate, spin, lighten, darken, mix * and friends...
-*/
-body.blog p {
-  background: #fff75d;
-}
-.hfeed a {
-  color: #bbcc90;
-}
-.hentry:first-child {
-  background: #ffffff;
+/* BUILT IN FUNCTIONS */
+.hentry:nth-child(2n+1) {
+  background: #ff9f1a;
 }
 .hentry:nth-child(2n+2) {
-  background: #ecebd6;
+  background: #e68500;
 }
-.hentry:nth-child(2n+1) {
-  background: #c4c17f;
+.hentry a {
+  color: #ffe900;
 }
-body.blog {
-  background: #7f33de;
+/* NESTED FUNCTIONS */
+.hentry P {
+  background: #f6639e;
 }
-/* Example 7b... nested color functions
-*/
-.hentry:nth-child(2n+2) p:first-child {
-  background: #12e5ff;
-}
-/*
-* Example 7... built in LESS math functions *, /, +, -, floor, ceil, round, etc
-*/
+/* READING, WRITING AND ARITHMATIC */
 .multiplication {
-  margin: 2%;
+  padding: 2%;
 }
 .division {
-  margin: 5%;
+  padding: 5%;
 }
-.hentry:first-child {
-  margin: 2%;
-  width: 450px;
+.hentry:nth-child(2n+1) {
+  width: 500px;
+  padding: 2%;
 }
 .hentry:nth-child(2n+2) {
-  width: 400px;
-  height: 400px;
-  margin: 5%;
-  width: 250px;
-  border-radius: 628.3077999999999px;
+  width: 300px;
+  padding: 5%;
 }
